@@ -4,6 +4,7 @@ from distutils.command.upload import upload
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
 from cbvApp.models import User
+from authApp.models import CustomUser
 from django.shortcuts import redirect
 
 # Create your views here.
@@ -23,8 +24,12 @@ class UserCreateView(CreateView):
         upl = request.FILES
         upload = upl['image']
         is_active = request.POST['status']
+
+        username = request.POST['username']
+        password = request.POST['password']
+        retype_password = request.POST['retype_password']
         
-        User.objects.create(
+        add = User(
             firstName=firstname, 
             lastName=lastname, 
             email=email, 
@@ -33,6 +38,19 @@ class UserCreateView(CreateView):
             upload=upload, 
             is_active=is_active
         )
+        add.save()
+
+        role = 1
+        aid = add.id
+
+        user = CustomUser.objects.create_user(
+            username=username,
+            password=password,
+            email=email,
+            role = role,
+            aid = aid
+        )
+        user.save()
         return redirect('cbvApp:list')
 
 class UserListView(ListView):
@@ -85,5 +103,8 @@ class UserDeleteView(DeleteView):
     success_url = reverse_lazy('cbvApp:list')
 
     def get(self, request, *args, **kwargs):
-        self.delete(request)
-        return reverse_lazy('cbvApp:list')
+        delete_user = User.objects.get(id=self.kwargs.get("pk"))
+        delete_user.delete()
+        delete_user_model = CustomUser.objects.get(id=self.kwargs.get("pk"))
+        delete_user_model.delete()
+        return redirect('cbvApp:list')

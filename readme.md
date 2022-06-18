@@ -1,9 +1,18 @@
 # DjangoPackage Project
 
-## Class Based Views
+## Django Operations
 
-1. Create View (Working)
-2. List View (Working)
-3. Detail View (Working)
-4. Update View (Not-Working)
-5. Delete View (Not-Working)
+1. Create View (Completed)
+2. List View (Completed)
+3. Detail View (Completed)
+4. Update View (Ongoing)
+5. Delete View (Completed)
+
+## Custom User Model
+
+1. Create Custom User Model (Completed)
+2. Update Custom User Mode (Ongoing)
+
+## Other Features
+
+1. Django Celery

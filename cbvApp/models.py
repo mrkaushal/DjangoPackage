@@ -13,3 +13,7 @@ class User(models.Model):
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def delete(self, using=None, keep_parents=False):
+        self.upload.delete(self.upload.name)
+        super().delete()

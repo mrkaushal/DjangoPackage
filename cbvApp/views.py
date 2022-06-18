@@ -1,6 +1,7 @@
 import os
 
 from distutils.command.upload import upload
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
 from cbvApp.models import User
 from django.shortcuts import redirect
@@ -79,15 +80,10 @@ class UserUpdateView(UpdateView):
         return redirect('cbvApp:list')
 
 class UserDeleteView(DeleteView):
-    template_name = 'cbvApp/user_delete.html'
     model = User
-    success_url = '/cbvApp/list'
+    template_name = 'cbvApp/user_list.html'
+    success_url = reverse_lazy('cbvApp:list')
 
-    def post(self, request, *args, **kwargs):
-        cid = self.kwargs.get("pk")
-        User.objects.filter(pk=cid).delete()
-        return redirect('cbvApp:list')
-
-    def get_object(self):
-        cid = self.kwargs.get("pk")
-        return User.objects.get(pk=cid)
+    def get(self, request, *args, **kwargs):
+        self.delete(request)
+        return reverse_lazy('cbvApp:list')

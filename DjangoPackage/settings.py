@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Custom apps
     'homeApp',
     'cbvApp',
+    'authApp',
 ]
 
 MIDDLEWARE = [

@@ -3,6 +3,12 @@
 ## Django Operations
 
 1. Create View (Completed)
+
+   - Character Input
+   - Boolean Input
+   - Dropdown Input
+   - Image Input
+   
 2. List View (Completed)
 3. Detail View (Completed)
 4. Update View (Ongoing)

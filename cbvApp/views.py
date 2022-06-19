@@ -28,7 +28,15 @@ class UserCreateView(CreateView):
 
         username = request.POST['username']
         password = request.POST['password']
-        retype_password = request.POST['retype_password']
+
+        check_email = CustomUser.objects.filter(email=email)
+        if check_email:
+            return JsonResponse({'exist_email': 1})
+
+        check_username = CustomUser.objects.filter(username=username)
+        if check_username:
+            return JsonResponse({'exist_username': 1})
+
         
         add = User(
             firstName=firstname, 

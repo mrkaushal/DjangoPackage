@@ -22,3 +22,8 @@
 ## Other Features
 
 1. Django Celery
+
+
+# Last Log's
+
+- Working on Login View

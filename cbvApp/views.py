@@ -1,6 +1,7 @@
 import os
 
 from distutils.command.upload import upload
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
 from cbvApp.models import User
@@ -51,7 +52,7 @@ class UserCreateView(CreateView):
             aid = aid
         )
         user.save()
-        return redirect('cbvApp:list')
+        return JsonResponse({'send': 1})
 
 class UserListView(ListView):
     template_name = 'cbvApp/user_list.html'

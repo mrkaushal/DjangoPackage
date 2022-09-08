@@ -1,0 +1,9 @@
+asgiref
+autopep8
+Django
+mysqlclient
+Pillow
+pycodestyle
+sqlparse
+toml
+tzdata
